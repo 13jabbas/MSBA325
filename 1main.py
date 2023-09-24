@@ -21,7 +21,7 @@ with dataset:
 	st.header('Lego Sets and Themes')
 	st.text(' I found this dataset on kaggle from the previous assignemnt')
 
-	lego_data = pd.read_csv('Data/lego_sets_and_themes.csv')
+	lego_data = pd.read_csv('lego_sets_and_themes.csv')
 	st.write(lego_data.head())
 
 #Our bar plots 
