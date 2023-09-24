@@ -72,10 +72,7 @@ with model_training:
 
 
 	
-#Launching the app
-	your-repository/
-	your_app.py
-	requirements.txt
+
 
 
 
