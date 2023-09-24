@@ -3,7 +3,6 @@ pandas
 plotly
 numpy
 scipy
-matplotlib.pyplot 
 plotly.figure_factory 
 plotly.express 
 seaborn 
