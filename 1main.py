@@ -13,7 +13,15 @@ features = st.container()
 model_training = st.container()
 
 # Read the Lego dataset from a CSV file
-lego_data = pd.read_csv('Data/lego_sets_and_themes.csv')
+
+import os
+import pandas as pd
+
+# Get the absolute path to the CSV file
+file_path = os.path.join(os.path.dirname(__file__), 'Data', 'lego_sets_and_themes.csv')
+
+# Read the CSV file
+lego_data = pd.read_csv(file_path)
 
 # Define Streamlit app
 with header:
