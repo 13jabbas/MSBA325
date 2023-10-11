@@ -1,6 +1,3 @@
 streamlit
-panda
-plotly
-scikit-learn
+pandas
 plotly-express
-
