@@ -59,24 +59,16 @@ with features:
 	st.markdown('* **First Feature:** First feature relating to lego dataset')
 
 with model_training:
-	st.header('Interactive Model')
-	st.text(' Here you can choose the parameters of the model')
+    st.header('Interactive Model')
+    st.text('Here you can choose the parameters of the model')
 
-	sel_col, disp_col = st.columns(2)
+    # Define your model parameters
+    max_depth = sel_col.slider('What is your maximum depth of the model?', min_value=10, max_value=100, value=20, step=10)
+    number_estimators = sel_col.selectbox('How many legos should we sell?', options=[100, 200, 300, 'No limit'], index=0)
 
-	
+    # Display the selected parameters
+    st.text(f'Selected Maximum Depth: {max_depth}')
+    st.text(f'Selected Number of Legos to Sell: {number_estimators}')
 
-
-	number_estimators = sel_col.selectbox('How many legos should we sell?', options = [100,200,300, 'No limit'], index = 0 )
-
-	sel_col.text('List of themes')
-	sel_col.write(lego_data.theme_name)
-
-	input_feature = sel_col.text_input('What imformation would you like to view?', 'set_name')
-
-
-	
-
-
-
+    # You can now use these parameters in your model, but you need to implement your model training code here.
 	
