@@ -64,7 +64,7 @@ with model_training:
 
 	sel_col, disp_col = st.columns(2)
 
-	max_depth = sel_col.slider('What is your maximum depth of the model?', min_value=10, max_value= 100, value= 20, step=10)
+	
 
 
 	number_estimators = sel_col.selectbox('How many legos should we sell?', options = [100,200,300, 'No limit'], index = 0 )
