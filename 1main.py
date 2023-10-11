@@ -1,8 +1,6 @@
-# Import necessary packages
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, r2_score
 
@@ -14,15 +12,12 @@ model_training = st.container()
 
 # Read the Lego dataset from a CSV file
 
-import os
-import pandas as pd
-
 # Get the absolute path to the CSV file
-file_path = os.path.join(os.path.dirname(__file__), 'Data', 'lego_sets_and_themes.csv')
+file_path = 'Data/lego_sets_and_themes.csv'
 
 # Read the CSV file
+lego_data = pd.read_csv(file_path)
 
-lego_data = pd.read_csv('lego_sets_and_themes.csv')
 # Define Streamlit app
 with header:
     st.title('Lego Sales Across Time')
