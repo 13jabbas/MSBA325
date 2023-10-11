@@ -1,8 +1,11 @@
 #Packages I need
 import streamlit as st 
 import pandas as pd
+import matplotlib.pyplot as plt
 import numpy as np
+import plotly.figure_factory as ff
 import plotly.express as px
+from sklearn.ensemble import RandomForestRegressor
 import seaborn as sns
 import plotly.graph_objects as go
 #Layout the page with headings 
@@ -19,11 +22,15 @@ with header:
 #Display our main data set
 with dataset: 
 	st.header('Lego Sets and Themes')
-	st.text(' I found this dataset on kaggle from the previous assignemnt')
+	st.text(' I found this dataset on kaggle from the previous assignemnt. It looks at lego set sales data across time. An indepth look into lego set themes, their sales numbers and also lots of techinacl data all the way down to the number of parts!')
 
-	lego_data = pd.read_csv('lego_sets_and_themes.csv')
+	lego_data = pd.read_csv('Data/lego_sets_and_themes.csv')
 	st.write(lego_data.head())
 
+# Adjust the data based on the slider's value.
+    # For demonstration purposes, let's say you only want to display data for years that have more sets than the max_depth value.
+    filtered_data = lego_data[lego_data['year_released'].value_counts() > max_depth]
+    
 #Our bar plots 
 	st.subheader('Quantity of Lego Sets Released Each Year')
 	number_parts = pd.DataFrame(lego_data['year_released'].value_counts()).head(50)
@@ -66,6 +73,10 @@ with model_training:
 	sel_col.write(lego_data.theme_name)
 
 	input_feature = sel_col.text_input('What imformation would you like to view?', 'set_name')
+
+
+	
+
 
 
 	
