@@ -6,13 +6,13 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, r2_score
 
-# Layout the page with headings
+# Define separate sections of the Streamlit app
 header = st.container()
 dataset = st.container()
 features = st.container()
 model_training = st.container()
 
-# Read the Lego dataset
+# Read the Lego dataset from a CSV file
 lego_data = pd.read_csv('Data/lego_sets_and_themes.csv')
 
 # Define Streamlit app
@@ -24,16 +24,17 @@ with header:
 with dataset:
     st.header('Lego Sets and Themes')
     st.text('I found this dataset on Kaggle from the previous assignment. It looks at Lego set sales data across time. An in-depth look into Lego set themes, their sales numbers, and also lots of technical data all the way down to the number of parts.')
-    
-    # Your data filtering code (you can adjust this as needed)
+
+    # Data filtering code for selecting years with a minimum number of sets
     max_depth = st.slider('Filter by Minimum Number of Sets in a Year', min_value=10, max_value=100, value=20, step=10)
     filtered_data = lego_data[lego_data['year_released'].value_counts() > max_depth]
     
+    # Display a bar chart showing the quantity of Lego sets released each year
     st.subheader('Quantity of Lego Sets Released Each Year')
     number_parts = pd.DataFrame(lego_data['year_released'].value_counts()).head(50)
     st.bar_chart(number_parts)
 
-    st.subheader('Time stamp data showing each theme and the span of years for production')
+    # Display a violin plot showing the span of years for production of each theme
     lego_2000 = lego_data[lego_data.year_released >= 2000]
     fig_year = px.violin(
         lego_2000,
@@ -59,9 +60,9 @@ with model_training:
     # Create a simple linear regression model
     model = LinearRegression()
 
-    # Split the data into features and target
-    X = lego_data[['feature1', 'feature2']]  # Replace with actual features
-    y = lego_data['target']  # Replace with actual target variable
+    # Split the data into features and target (replace with actual features and target variable)
+    X = lego_data[['feature1', 'feature2']]
+    y = lego_data['target']
 
     # Train the model
     model.fit(X, y)
@@ -80,5 +81,3 @@ with model_training:
     st.subheader('Model Performance Metrics')
     st.write(f'Mean Squared Error: {mse:.2f}')
     st.write(f'R-squared: {r2:.2f}')
-
-# Add comments and explanations as needed to make the code more understandable.
