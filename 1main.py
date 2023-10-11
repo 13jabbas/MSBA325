@@ -2,6 +2,9 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, r2_score
 
 # Layout the page with headings
 header = st.container()
@@ -20,7 +23,7 @@ with header:
 # Display the main dataset
 with dataset:
     st.header('Lego Sets and Themes')
-    st.text('I found this dataset on Kaggle from the previous assignment. It looks at Lego set sales data across time. An in-depth look into Lego set themes, their sales numbers, and also lots of technical data all the way down to the number of parts!')
+    st.text('I found this dataset on Kaggle from the previous assignment. It looks at Lego set sales data across time. An in-depth look into Lego set themes, their sales numbers, and also lots of technical data all the way down to the number of parts.')
     
     # Your data filtering code (you can adjust this as needed)
     max_depth = st.slider('Filter by Minimum Number of Sets in a Year', min_value=10, max_value=100, value=20, step=10)
@@ -52,20 +55,30 @@ with model_training:
 
     # Define your model parameters
     max_depth = st.slider('What is your maximum depth of the model?', min_value=10, max_value=100, value=20, step=10)
-    number_estimators = st.selectbox('How many Legos should we sell?', options=[100, 200, 300, 'No limit'], index=0)
 
-    st.text('List of themes')
-    st.write(lego_data.theme_name)
+    # Create a simple linear regression model
+    model = LinearRegression()
 
-    input_feature = st.text_input('What information would you like to view?', 'set_name')
+    # Split the data into features and target
+    X = lego_data[['feature1', 'feature2']]  # Replace with actual features
+    y = lego_data['target']  # Replace with actual target variable
 
-    # Now you can use these parameters in your model (update this part with your model code)
-    # For example:
-    # from sklearn.ensemble import RandomForestRegressor
-    # model = RandomForestRegressor(max_depth=max_depth, n_estimators=number_estimators)
-    # ...
-    # Perform model training and predictions here
+    # Train the model
+    model.fit(X, y)
 
-    # You can display model results or visualization here based on your model predictions
+    # Make predictions
+    predictions = model.predict(X)
+
+    # Calculate model performance metrics
+    mse = mean_squared_error(y, predictions)
+    r2 = r2_score(y, predictions)
+
+    # Display model results
+    st.subheader('Model Predictions')
+    st.write(predictions)
+
+    st.subheader('Model Performance Metrics')
+    st.write(f'Mean Squared Error: {mse:.2f}')
+    st.write(f'R-squared: {r2:.2f}')
 
 # Add comments and explanations as needed to make the code more understandable.
